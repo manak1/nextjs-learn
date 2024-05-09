@@ -28,4 +28,4 @@ jobs:
           echo "Hello World-${{github.run_id}}" > hello.txt
           git add hello.txt
           git commit -m "Add hello.txt"
-          git push origin new-branch-${{ github.run_id }}
+          git push https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/${{github.repository}}/ new-branch-${{ github.run_id }}
