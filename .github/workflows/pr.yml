@@ -1,0 +1,30 @@
+name: Create and Sign Pull Request
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  create_and_sign_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repositroy
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Config Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create new branch
+        run: |
+          git checkout -b new-branch-${{ github.run_id }}
+
+      - name: Make changes
+        run: |
+          echo "Hello World-${{github.run_id}}" > hello.txt
+          git add hello.txt
+          git commit -m "Add hello.txt"
+          git push origin new-branch-${{ github.run_id }}
