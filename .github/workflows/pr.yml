@@ -35,7 +35,7 @@ jobs:
 
       - name: Make changes
         run: |
-          echo "Hellooo World-${{github.run_id}}" > hello.txt
+          echo "Hello World-${{github.run_id}}" > hello.txt
           git add hello.txt
           git commit -S -m "Add hello.txt"
           git push https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/${{github.repository}}/ new-branch-${{ github.run_id }}
