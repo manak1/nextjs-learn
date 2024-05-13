@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          persist-credentials: false
 
       - name: Imports bot's GPG key for signing commits
         id: import-gpg
