@@ -9,15 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repositroy
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           persist-credentials: false
 
       - name: Imports bot's GPG key for signing commits
-        id: import-gpg
-        uses: crazy-max/ghaction-import-gpg@v4
+        uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY}}
           passphrase: ${{ secrets.GPG_PASSPHRASE}}
@@ -36,7 +35,7 @@ jobs:
 
       - name: Make changes
         run: |
-          echo "Helloo World-${{github.run_id}}" > hello.txt
+          echo "Hellooo World-${{github.run_id}}" > hello.txt
           git add hello.txt
           git commit -S -m "Add hello.txt"
           git push https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/${{github.repository}}/ new-branch-${{ github.run_id }}
